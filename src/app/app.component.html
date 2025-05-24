@@ -1,0 +1,14 @@
+<div class="layout">
+  @if(isAuthenticated){
+  <eclipse-header></eclipse-header>
+  <eclipse-nav-bar></eclipse-nav-bar>
+  }
+  <router-outlet></router-outlet>
+</div>
+
+<div class="screen-overlay" [ngClass]="{ active: utilityService.isLoading }">
+  <div class="gif-container" *ngIf="utilityService.isLoading">
+    <img [src]="NIQLoaderImage" class="loader-gif" alt="loader"/>
+    <div class="caption">Please wait...</div>
+  </div>
+</div>
