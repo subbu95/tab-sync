@@ -1,0 +1,104 @@
+:root {
+    --niq-font: "aktiv-grotesk", sans-serif;
+    --width-large: 100%;
+    --historyPage-padding: 0px 20px 0px 20px;
+    --historyPageHeader-height: 70px;
+    --historyPageHeader-padding: 15px 0px 15px 0px;
+    --historyPageHeader-gap: 15px !important;
+    --historyPageHeader-font-size: 20px;
+    --historyPageHeader-font-weight: 600;
+    --historyPageHeader-margin-top: 1.2%;
+    --displayFields-height: 40px;
+    --displayFields-gap: 10px !important;
+    --displayFields-background-color: #F2F4F8;
+    --displayFields-border: 1px solid #E4E4E4;
+    --displayFields-margin-bottom: 10px;
+    --displayFieldValues-gap: 30px;
+    --displayFieldValues-padding: 10px 15px 10px 15px;
+    --displayField-height: 20px;
+    --displayField-gap: 10px;
+    --displayField-font-size: 16px;
+    --displayField-font-weight: 400;
+    --displayField-line-height: 20px;
+    --displayField-color: #262626;
+    --displayKey-font-weight: 600;
+}
+
+.historyPage {
+    padding: var(--historyPage-padding);
+    font-family: var(--niq-font) !important;
+
+    .historyPageHeader {
+        display: flex;
+        align-items: center;
+        width: var(--width-large);
+        height: var(--historyPageHeader-height);
+        top: 91px !important;
+        padding: var(--historyPageHeader-padding);
+        gap: var(--historyPageHeader-gap);
+
+        h2 {
+            font-family: var(--niq-font) !important;
+            font-size: var(--historyPageHeader-font-size);
+            font-weight: var(--historyPageHeader-font-weight);
+            margin-top: var(--historyPageHeader-margin-top);
+        }
+    }
+
+    .displayFields {
+        display: flex;
+        align-items: center;
+        width: var(--width-large);
+        height: var(--displayFields-height);
+        gap: var(--displayFields-gap);
+        background-color: var(--displayFields-background-color);
+        border: var(--displayFields-border);
+        margin-bottom: var(--displayFields-margin-bottom);
+
+        .displayFieldValues {
+            display: flex;
+            width: var(--width-large);
+            ;
+            height: var(--displayFields-height);
+            gap: var(--displayFieldValues-gap);
+            padding: var(--displayFieldValues-padding);
+
+            .displayField {
+                display: flex;
+                height: var(--displayField-height);
+                gap: var(--displayField-gap);
+
+                span {
+                    font-size: var(--displayField-font-size);
+                    font-weight: var(--displayField-font-weight);
+                    line-height: var(--displayField-line-height);
+                    color: var(--displayField-color);
+                }
+
+                .displayKey {
+                    font-weight: var(--displayKey-font-weight);
+                }
+            }
+        }
+    }
+
+    body{
+        height: 410px;
+    }
+
+    .mat-mdc-table {
+        background: inherit;
+
+        .mat-mdc-header-row {
+            color: black !important;
+        }
+
+        .mat-mdc-row {
+            color: black !important;
+        }
+    }
+}
+
+main {
+    padding: 0px !important;
+}

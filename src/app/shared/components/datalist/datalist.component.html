@@ -1,0 +1,18 @@
+<mat-form-field>
+    <input matInput autocomplete="off" [attr.list]="listname" name="browser" [placeholder]="'Type to search'" id="input"
+    [value]="selected" (change)="onSelection($any($event.target).value)" [formControl]="control"
+        (keyup)="keyOnSelection($any($event.target).value)" />
+</mat-form-field>
+@if (fieldName === 'usrUsername') {
+    <datalist [id]="listname" role="listbox">
+        @for (menu of menuItems; track menu) {
+            <option data-value ="{{menu[valueKey]}}">{{ menu['firstName'] + ' ' + menu['lastName']}}</option>
+        }
+    </datalist>
+} @else {
+    <datalist [id]="listname" role="listbox">
+        @for (menu of menuItems; track menu) {
+            <option data-value="{{menu[valueKey]}}"></option>
+        }
+    </datalist>
+}

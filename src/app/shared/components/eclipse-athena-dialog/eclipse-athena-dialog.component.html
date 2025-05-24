@@ -1,0 +1,64 @@
+<niq-dialog #dialogBox (closeIconClick)="onDialogCloseIconClick()" [positionStrategy]="'global'" [closeOnEsc]="true"
+  [closeOnClickOutside]="true" (close)="onCloseDialogEvent()"
+  [hasBackdrop]="true" dialogContainerClass="athenaDialogContainerClass">
+  <div dialogTitle class="title">
+    {{ title }}
+    <niq-icon-button *ngIf="isPrimaryTabActive" [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'small'"
+      [iconName]="'download'" [position]="'top'" [colorTheme]="'light'" [tooltipType]="'simple'"
+      [label]="'Download'" [delay]="0" [left]="0" [top]="0" [showArrow]="true" [showTooltip]="true" [isMouseOver]="false"
+      (click)="downloadFile()"></niq-icon-button>
+  </div>
+  <div dialogBody>
+    <niq-tab-line-list [selected]="tabSelected" [showUnderline]="false" (selectedChange)="onSelectedChange($event,monId)">
+      <niq-tab-line size="medium" [value]="primaryTab">{{ primaryTabTitle }}</niq-tab-line>
+      <niq-tab-line size="medium" [value]="secondaryTab">{{ secondaryTabTitle }}</niq-tab-line>
+    </niq-tab-line-list>
+    <div class="line"></div>
+    <div class="gif-container" *ngIf="isLoading">
+      <img [src]="NIQLoaderImage" class="loader-gif" alt="loader"/>
+      <div class="caption">Please wait...</div>
+    </div>
+
+    <div *ngIf="isPrimaryTabActive && !isLoading" class="table-container">
+      <table #jobLogTable class="jobLogClass">
+        <tbody>
+          <tr class="empty-row"></tr>
+          <tr *ngFor="let item of logArray1; index as i">
+            <td class="label1">{{ logArray1[i]?.label }}</td>
+            <td class="job-log-value-class">{{ logArray1[i]?.value }}</td>
+            <td class="label1 gap-class">{{ logArray2[i]?.label }}</td>
+            <td class="job-log-value-class">{{ logArray2[i]?.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+      @if(isLogTruncated) {
+      <niq-callout class="customCallOutClass" state="info" title="This log is truncated, to view full log please download it" [withClose]="false"></niq-callout>
+      }
+      <div>
+        <textarea class="text-area-class-job-log" [ngClass]="{'text-area-truncated-class': !isLogTruncated}">{{ logContent }}</textarea>
+      </div>
+    </div>
+
+    <div *ngIf="isSecondaryTabActive && !isLoading" class="table-container">
+      <table class="stepDetailsClass" #stepDetailsTable>
+        <tbody>
+          <tr class="empty-row"></tr>
+          <tr *ngFor="let item of detailsData" class="row-container">
+            <td class="label">{{ item.label }}</td>
+            <td class="value" [ngClass]="item.value === 'FAILED' || item.value === 'NOT OK' ? 'failed':''">
+              {{ item.value }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!isPrimaryTabActive && !isSecondaryTabActive && hasError" class="error-container">
+      <img [src]="errorImageUrl" [alt]="genericErrMsg" class="error-img" />
+      <div class="error-msg">
+        <!-- <div class="first-msg">{{ errorCode }}</div> -->
+        <div class="second-msg">{{ errorMessage }}</div>
+      </div>
+    </div>
+  </div>
+</niq-dialog>

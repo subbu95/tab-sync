@@ -1,0 +1,254 @@
+:root {
+    --niq-font: "aktiv-grotesk", sans-serif;
+    --niq-selected-color: #e7eeff !important;
+    --niq-grey: #f4f4f4 !important;
+    --inline-font-style: "normal";
+    --border: 1px;
+    --inline-font-size: 14px;
+    --inline-line-height: 20px;
+    --inline-error-font-size: 11px;
+    --inline-error-line-height: 16px;
+    --blue-color: #2d6df6 !important;
+    --border-none: none !important;
+    --bg-color-light: #ffffff !important;
+    --font-black: var(--font-black) !important;
+    --panel-height: 40vh !important;
+    --max-width: 100% !important;
+    --width: 12em !important;
+    --padding: 4px;
+    --border-bottom: var(--border) solid transparent !important;
+    --padding-lr: 2px;
+    --padding-tb: 6px
+}
+
+.small {
+    --inline-font-size: 11px;
+    --inline-line-height: 16px;
+    --inline-error-font-size: 11px;
+    --inline-error-line-height: 16px;
+    --padding-lr: 1px;
+    --padding-tb: 3px
+}
+
+.medium {
+    --inline-font-size: 14px;
+    --inline-line-height: 20px;
+    --inline-error-font-size: 11px;
+    --inline-error-line-height: 16px;
+    --padding-lr: 2px;
+    --padding-tb: 6px
+}
+
+.large {
+    --inline-font-size: 16px;
+    --inline-line-height: 24px;
+    --inline-error-font-size: 14px;
+    --inline-error-line-height: 20px;
+    --padding-lr: 3px;
+    --padding-tb: 7px
+}
+
+/* mdc-line-ripple  Start here*/
+.mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-color: #868686 !important;
+}
+
+.mdc-text-field--filled .mdc-line-ripple::before {
+    border-bottom-width: 0px !important;
+    border-bottom-style: solid;
+}
+
+/* mdc-line-ripple  End here*/
+
+.on-white {
+    background-color: var(--niq-grey);
+    padding: 3px 3px 1px 1px;
+    width: fit-content;
+
+    & .mdc-text-field--filled .mdc-line-ripple::before {
+        border-bottom-width: 1px !important;
+        border-bottom-style: solid;
+        border-color: #868686 !important;
+    }
+
+}
+
+/* hover on the mat select option */
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+    background-color: var(--niq-grey) !important;
+}
+
+.mat-mdc-select-arrow :hover {
+    /*color change on hover arrow */
+    color: var(--blue-color);
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+    /*color change on selected value in list  */
+    background-color: var(--niq-selected-color) !important;
+}
+
+/* scroll bar code starts here */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 7px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px !important;
+    border: 1px solid rgb(231, 231, 231) !important;
+    /* should match background, can't be transparent */
+    background-color: #424242 !important;
+}
+
+/* scroll bar code ends here */
+
+.mat-mdc-form-field {
+    font-family: var(--niq-font) !important;
+}
+
+.form-field {
+    max-width: var(--max-width);
+    width: var(--width);
+    border-top: var(--border-none);
+    border-left: var(--border-none);
+    border-right: var(--border-none);
+    border-bottom: var(--border-bottom);
+    line-height: calc(var(--inline-line-height) - var(--border)) !important;
+    box-sizing: border-box;
+    align-items: center;
+    font-family: var(--niq-font) !important;
+    font-size: var(--inline-font-size) !important;
+    font-style: var(--inline-font-style) !important;
+    font-weight: var(--font-weight);
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+
+    /* to disable the tick mark in matselection */
+    & .mat-mdc-form-field-bottom-align::before {
+        display: none !important;
+    }
+
+    .mat-mdc-select {
+        font-family: var(--niq-font) !important;
+    }
+
+    .mat-mdc-select-arrow {
+        display: none;
+    }
+
+    .custom-arrow {
+        position: relative;
+        right: 4px;
+        bottom: 10px;
+        gap: 8px;
+    }
+
+    .dropdown-icon-while-selecting {
+        color: var(--blue-color);
+    }
+
+    &:hover {
+        border-bottom: 1px solid black !important;
+
+        .mat-mdc-form-field-icon-suffix {
+            niq-icon {
+                color: var(--blue-color);
+            }
+        }
+    }
+}
+
+.dropdown-while-selecting {
+    border-bottom: 1px solid black !important;
+
+    .mat-mdc-form-field-icon-suffix {
+        niq-icon {
+            color: var(--blue-color);
+        }
+    }
+}
+
+.panel {
+    max-height: var(--panel-height);
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 11em !important;
+    font-family: var(--niq-font) !important;
+    font-size: var(--inline-font-size) !important;
+    font-style: var(--inline-font-style) !important;
+    max-width: var(--max-width);
+    width: var(--width);
+    background-color: var(--bg-color-light) !important;
+
+    & .mat-mdc-option .mat-pseudo-checkbox-minimal {
+        display: none !important;
+    }
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    padding-left: 7px !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+    padding-left: 7px !important;
+}
+
+.mat-mdc-option {
+    font-family: var(--niq-font) !important;
+}
+
+.mat-light {
+    font-size: var(--font-size) !important;
+    background-color: var(--bg-color);
+    color: var(--font-black);
+    margin: 1px;
+
+    &:hover {
+        background-color: var(--bg-color-light) !important;
+        color: var(--font-black);
+    }
+
+    &.mat-selected {
+        background-color: #8d8c8c !important;
+        color: var(--font-black);
+    }
+
+    & .mat-light-panel {
+        background-color: #ffffff;
+        color: var(--font-black);
+    }
+
+    &.mat-mdc-option {
+        padding-left: var(--padding-lr) !important;
+        padding-right: var(--padding-lr) !important;
+        min-height: var(--item-ow-min-height, 20px);
+        overflow: hidden !important;
+    }
+}
+.search-container {
+  padding: 8px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+  align-items: center;
+}
+
+#matCustomInput {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,66 @@
+<table mat-table [dataSource]="dataSource()" matSort multiTemplateDataRows="true" class="mat-elevation-z8 table table-hover">
+  <!-- Expand/Collapse Column (First Column) -->
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let row">
+      @if (row.children && row.children.length > 0) {
+        <button class="toggle-button" (click)="toggleRow(row)">
+          @if (isRowExpanded(row)) {
+            <span>^</span> <!-- Up Arrow when expanded -->
+          } @else {
+            <span>▼</span> <!-- Down Arrow when collapsed -->
+          }
+        </button>
+      }
+    </td>
+  </ng-container>
+
+  <!-- Main Column Definitions -->
+  @for (column of columns; track column) {
+    <ng-container [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-sort-header">{{ column }}</th>
+      <td mat-cell *matCellDef="let row">{{ row[keyMapping(column)] }}</td>
+    </ng-container>
+  }
+
+  <!-- Expandable Row Definition -->
+  @if (showAction) {
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let row" [attr.colspan]="columns.length + 1">
+        <div class="expanded-row" [class.expanded]="isRowExpanded(row)">
+          @if (isRowExpanded(row) && row.children && row.children.length > 0) {
+            <table mat-table [dataSource]="getChildDataSource(row)" matSort #childSort="matSort">
+              @for (childColumn of childColumns; track childColumn) {
+                <ng-container [matColumnDef]="childColumn">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header >{{ childColumn }}</th>
+                  <td mat-cell *matCellDef="let childRow">{{ childRow[childColumn] }}</td>
+                </ng-container>
+              }
+
+              <!-- Header Row -->
+              <tr mat-header-row *matHeaderRowDef="childColumns"></tr>
+
+              <!-- Data Rows -->
+              <tr mat-row *matRowDef="let childRow; columns: childColumns;"></tr>
+            </table>
+
+            @if (row.children.length > childTableLimit()) {
+              <button (click)="viewMore()">View More</button>
+            }
+          }
+        </div>
+      </td>
+    </ng-container>
+  }
+  <!-- Header Row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns()" class="actions-cell"></tr>
+
+  <!-- Parent Data Rows -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+
+  <!-- Expanded Row -->
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="expanded-row"
+      [class.hidden]="expandedRow() !== row"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

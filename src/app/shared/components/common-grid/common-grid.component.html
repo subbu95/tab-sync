@@ -1,0 +1,271 @@
+<div >  
+  <table mat-table [dataSource]="dataSource" class="custom-table" matSort
+    *ngIf="data.length > 0" multiTemplateDataRows>
+    <ng-container *ngIf="showAction" matColumnDef="history">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header history-action-col">
+        <niq-menu [closeOnActivate]="false" [ignoreSelect]="true" [(selectedValues)]="menuSelectedColumns"
+          [selectMode]="'multi'" (selectedValuesChange)="getSelectedColumns($event)">
+          <niq-icon dropdown-trigger state="primary" size="medium" iconName="data-grid-table" colorTheme="light"></niq-icon>
+          <div dropdown-content class="gridMenu">
+            @for (column of gridColumns; track column) {
+              <niq-item [checkmark]="true" [value]="column">
+                <niq-icon
+                  [iconName]="'success'" [size]="'small'"
+                  [ngClass]="{
+                    'icon-enabled': menuSelectedColumns.includes(column),
+                    'icon-disabled': !menuSelectedColumns.includes(column)
+                  }"
+                ></niq-icon>
+                {{ column }}
+              </niq-item>
+            }
+          </div>
+          <div class="filter-footer">
+            <button class="filter_button reset" (click)="getSelectedColumns(['Select all columns'])">Reset</button>
+            <button class="filter_button apply" (click)="applySelectedColumnsToGrid()">Apply</button>
+          </div>
+        </niq-menu>
+      </th>
+      <td mat-cell *matCellDef="let row" class="history-action-col" [ngClass]="{'while-opening-child-table': expandedRow[row.monId] != null || clickedRowIndex === row.monId}">
+        <div *ngIf="loadingChildData[row.monId]" class="loading-container">
+          <img [src]="NIQLoaderImage" class="loader-gif" alt="loader" />
+        </div>
+        <div *ngIf="!loadingChildData[row.monId]">
+          <niq-icon-button class="history-icon-while-selecting" [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+            [iconName]="'chevron-up'" [position]="'top'" [colorTheme]="'light'" [tooltipType]="'simple'"
+            [label]="'History'" [delay]="0" [left]="0" [top]="0" [showArrow]="true" [showTooltip]="true"
+            [isMouseOver]="false"  (click)="toggleChildTable(row, $event)" [hidden]="expandedRow[row.monId] == null"> </niq-icon-button>
+          <niq-icon-button class="history-icon" [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+              [iconName]="'chevron-down'" [position]="'top'" [colorTheme]="'light'" [tooltipType]="'simple'"
+              [label]="'History'" [delay]="0" [left]="0" [top]="0" [showArrow]="true" [showTooltip]="true"
+              [isMouseOver]="false"  (click)="toggleChildTable(row, $event)" [hidden]="expandedRow[row.monId] != null"> </niq-icon-button>
+        </div>        
+      </td>
+      </ng-container>
+      <!-- Dynamic Column Definitions -->
+      @for (column of columns; track column) {
+        <ng-container [matColumnDef]="column">
+          @if (enableSorting) {
+            @if (column.toLocaleLowerCase() == "date") {
+              <th mat-header-cell *matHeaderCellDef class="sticky-header date-col">
+                <div class="columnNameAndSort">
+                  <div>
+                    {{ column }}
+                  </div>
+                  <!-- Sort Menu -->
+                  <div mat-sort-header>
+                    <niq-menu>
+                      <!-- Sort Default Icon -->
+                      <svg matTooltip="Sort" *ngIf="sortDirection[keyMapping(column)] === ''" dropdown-trigger width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_2848_374642)">
+                          <path
+                            d="M7.30762 3.41113L6.69238 4.02637L4.38184 1.72266L4.375 14H3.5L3.50684 1.70215L1.18262 4.02637L0.567383 3.41113L3.9375 0.0410156L7.30762 3.41113ZM12.8242 9.97363L13.4463 10.5889L10.0762 13.959L6.69922 10.5889L7.32129 9.97363L9.63184 12.2842L9.625 0H10.5L10.5068 12.291L12.8242 9.97363Z"
+                            fill="black" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_2848_374642">
+                            <rect width="14" height="14" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <!-- Sort Ascending Icon -->
+                      <svg *ngIf="sortDirection[keyMapping(column)] === 'asc'" dropdown-trigger matTooltip="Sort Ascending Order" width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8.3125 7H11.8125L9.625 11.375H11.8125V12.25H8.3125L10.5 7.875H8.3125V7ZM3.5 11.1973L4.61426 10.083L5.22949 10.6982L3.0625 12.8721L0.895508 10.6982L1.51074 10.083L2.625 11.1973V0.875H3.5V11.1973ZM9.04395 5.25L8.75 6.125H7.875L9.625 0.875H10.5L12.25 6.125H11.375L11.0811 5.25H9.04395ZM10.0625 2.1875L9.33105 4.375H10.7939L10.0625 2.1875Z"
+                          fill="#AA213F" />
+                      </svg>
+                      <!-- Sort Descending Icon -->
+                      <svg *ngIf="sortDirection[keyMapping(column)] === 'desc'" dropdown-trigger matTooltip="Sort Descending Order" width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.8125 6.125H8.3125L10.5 1.75H8.3125V0.875H11.8125L9.625 5.25H11.8125V6.125ZM3.5 11.1973L4.61426 10.083L5.22949 10.6982L3.0625 12.8721L0.895508 10.6982L1.51074 10.083L2.625 11.1973V0.875H3.5V11.1973ZM11.375 12.25L11.0811 11.375H9.04395L8.75 12.25H7.875L9.625 7H10.5L12.25 12.25H11.375ZM9.33105 10.5H10.7939L10.0625 8.3125L9.33105 10.5Z"
+                          fill="#AA213F" />
+                      </svg>
+                      <div dropdown-content>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:'asc'})">Ascending</niq-item>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:'desc'})">Descending</niq-item>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:''})">Reset</niq-item>
+                      </div>
+                    </niq-menu>
+                  </div>
+                </div>
+              </th>
+            } @else {
+              <th mat-header-cell *matHeaderCellDef class="sticky-header">
+                <div class="columnNameAndSort">
+                  <div>
+                    {{ column }}
+                  </div>
+                  <!-- Sort Menu -->
+                  <div mat-sort-header>
+                    <niq-menu>
+                      <!-- Sort Default Icon -->
+                      <svg matTooltip="Sort" *ngIf="sortDirection[keyMapping(column)] === ''" dropdown-trigger width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_2848_374642)">
+                          <path
+                            d="M7.30762 3.41113L6.69238 4.02637L4.38184 1.72266L4.375 14H3.5L3.50684 1.70215L1.18262 4.02637L0.567383 3.41113L3.9375 0.0410156L7.30762 3.41113ZM12.8242 9.97363L13.4463 10.5889L10.0762 13.959L6.69922 10.5889L7.32129 9.97363L9.63184 12.2842L9.625 0H10.5L10.5068 12.291L12.8242 9.97363Z"
+                            fill="black" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_2848_374642">
+                            <rect width="14" height="14" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <!-- Sort Ascending Icon -->
+                      <svg *ngIf="sortDirection[keyMapping(column)] === 'asc'" dropdown-trigger matTooltip="Sort Ascending Order" width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8.3125 7H11.8125L9.625 11.375H11.8125V12.25H8.3125L10.5 7.875H8.3125V7ZM3.5 11.1973L4.61426 10.083L5.22949 10.6982L3.0625 12.8721L0.895508 10.6982L1.51074 10.083L2.625 11.1973V0.875H3.5V11.1973ZM9.04395 5.25L8.75 6.125H7.875L9.625 0.875H10.5L12.25 6.125H11.375L11.0811 5.25H9.04395ZM10.0625 2.1875L9.33105 4.375H10.7939L10.0625 2.1875Z"
+                          fill="#AA213F" />
+                      </svg>
+                      <!-- Sort Descending Icon -->
+                      <svg *ngIf="sortDirection[keyMapping(column)] === 'desc'" dropdown-trigger matTooltip="Sort Descending Order" width="14" height="14"
+                        viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.8125 6.125H8.3125L10.5 1.75H8.3125V0.875H11.8125L9.625 5.25H11.8125V6.125ZM3.5 11.1973L4.61426 10.083L5.22949 10.6982L3.0625 12.8721L0.895508 10.6982L1.51074 10.083L2.625 11.1973V0.875H3.5V11.1973ZM11.375 12.25L11.0811 11.375H9.04395L8.75 12.25H7.875L9.625 7H10.5L12.25 12.25H11.375ZM9.33105 10.5H10.7939L10.0625 8.3125L9.33105 10.5Z"
+                          fill="#AA213F" />
+                      </svg>
+                      <div dropdown-content>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:'asc'})">Ascending</niq-item>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:'desc'})">Descending</niq-item>
+                        <niq-item (click)="onSortChange({active:keyMapping(column),direction:''})">Reset</niq-item>
+                      </div>
+                    </niq-menu>
+                  </div>
+                </div>
+              </th>
+            }
+          } @else if (column.toLocaleLowerCase() == "start date" || column.toLocaleLowerCase() == "end date") {
+            <!-- Extra width for date column -->
+            <th mat-header-cell *matHeaderCellDef class="sticky-header date-col"> {{ column }} </th>
+          }  @else {
+            <th mat-header-cell *matHeaderCellDef class="sticky-header"> {{ column }} </th>
+          }
+          @if (column.toLocaleLowerCase() === 'country') {
+            <!-- Flag Implementation -->
+            <td mat-cell *matCellDef="let row" [ngClass]="{'while-opening-child-table': expandedRow[row.monId] != null || clickedRowIndex === row.monId}"
+              [innerHtml]="row[keyMapping(column)].toString() | countryFlag: row[keyMapping(column)].toString()" (click)="rowClick(row, $event)"
+            >
+            </td>
+          } @else if (column.toLocaleLowerCase() === 'date') {
+            <!-- Extra width for date column -->
+            <td mat-cell *matCellDef="let row" [ngClass]="{'while-opening-child-table': expandedRow[row.monId] != null || clickedRowIndex === row.monId}" (click)="rowClick(row, $event)" class="date-align"
+            >
+              {{ row[keyMapping(column)] }}
+            </td>
+          } @else if (column.toLocaleLowerCase() === 'job id' || column.toLocaleLowerCase() === 'user' || column.toLocaleLowerCase() === 'last step' || column.toLocaleLowerCase() === 'session') {
+            <!-- Character truncate & shown tooltip -->
+            <td mat-cell *matCellDef="let row" [ngClass]="{'while-opening-child-table': expandedRow[row.monId] != null || clickedRowIndex === row.monId}" (click)="rowClick(row, $event)">
+              <niq-menu [activateOnHover]="true" [hasBackdrop]="false">
+                <span *ngIf="column.toLocaleLowerCase() === 'job id'" dropdown-trigger>{{row[keyMapping(column)] | truncate: 7 }}</span>
+                <span *ngIf="column.toLocaleLowerCase() === 'user'" dropdown-trigger>{{row[keyMapping(column)] | truncate: 8 }}</span>
+                <span *ngIf="column.toLocaleLowerCase() === 'last step' || column.toLocaleLowerCase() === 'session'" dropdown-trigger>{{row[keyMapping(column)] }}</span>
+                <div dropdown-content>
+                  <niq-item>
+                    <div *ngIf="column.toLocaleLowerCase() === 'job id' || column.toLocaleLowerCase() === 'last step' || column.toLocaleLowerCase() === 'session'" (click)="copyText(row[keyMapping(column)])">
+                      <niq-icon-button class="icon-color" [state]="'default'" [type]="'secondary'" [mode]="'light'"
+                        [size]="'small'" [iconName]="'duplicate'" [position]="'top'" [colorTheme]="'light'" [delay]="0"
+                        [left]="0" [top]="0" [isMouseOver]="true"></niq-icon-button>
+                      {{row[keyMapping(column)]}}
+                    </div>
+                    <div *ngIf="column.toLocaleLowerCase() === 'user'">
+                      {{row[keyMapping(column)]}}
+                    </div>
+                  </niq-item>
+                </div>
+              </niq-menu>
+            </td>
+          } @else {
+            <td mat-cell *matCellDef="let row" [ngClass]="{
+              'status-column-value-running': row[keyMapping(column)]==='RUNNING',
+              'status-column-value-done': row[keyMapping(column)]==='DONE',
+              'status-column-value-failed': row[keyMapping(column)]==='FAILED',
+              'reset-column-value-notOk': row[keyMapping(column)]==='NOT OK',
+              'while-opening-child-table': expandedRow[row.monId] != null || clickedRowIndex === row.monId
+              }" (click)="rowClick(row, $event)">
+              {{ row[keyMapping(column)] }}
+            </td>
+          }
+        </ng-container>
+      }
+     
+      <!-- Table Headers & Rows -->
+      <tr mat-header-row *matHeaderRowDef="showAction ? ['history'].concat(columns) : columns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: showAction ? ['history'].concat(columns) : columns;"></tr>
+   
+      <!-- Child Row -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" class="child-element-detail" [attr.colspan]="columns.length + 1">
+          @if(expandedRow[element.monId] != null) {
+            <div class="child-element-detail"  [@detailExpand]="element['expanded'] ? 'expanded' : 'collapsed'">
+              <div class="inner-table" >
+                <table mat-table [dataSource]="childData[element.monId]" class="child-table">
+                  @for (childCol of childColumns; track childCol) {
+                    <ng-container [matColumnDef]="childCol">
+                      <th mat-header-cell *matHeaderCellDef> {{ childCol | titlecase }}</th>
+                      @if (childCol.toLocaleLowerCase() === 'job id' || childCol.toLocaleLowerCase() === 'session') {
+                        <!-- Character truncate & shown tooltip -->
+                        <td mat-cell *matCellDef="let row" (click)="rowClick(row, $event)">
+                          <niq-menu [activateOnHover]="true" [hasBackdrop]="false">
+                            <span *ngIf="childCol.toLocaleLowerCase() === 'job id'" dropdown-trigger>{{row[keyMapping(childCol)] | truncate: 7 }}</span>
+                            <span *ngIf="childCol.toLocaleLowerCase() === 'session'" dropdown-trigger>{{row[keyMapping(childCol)]}}</span>
+                            <div dropdown-content>
+                              <niq-item>
+                                <div *ngIf="childCol.toLocaleLowerCase() === 'job id' || childCol.toLocaleLowerCase() === 'session'" (click)="copyText(row[keyMapping(childCol)])">
+                                  <niq-icon-button class="icon-color" [state]="'default'" [type]="'secondary'" [mode]="'light'"
+                                    [size]="'small'" [iconName]="'duplicate'" [position]="'top'" [colorTheme]="'light'" [delay]="0"
+                                    [left]="0" [top]="0" [isMouseOver]="true"></niq-icon-button>
+                                  {{row[keyMapping(childCol)]}}
+                                </div>
+                              </niq-item>
+                            </div>
+                          </niq-menu>
+                        </td>
+                      }
+                      @else{
+                      <td mat-cell *matCellDef="let child"
+                      [ngClass]="{
+                        'status-column-value-running': child[keyMapping(childCol)]==='RUNNING',
+                        'status-column-value-done': child[keyMapping(childCol)]==='DONE',
+                        'status-column-value-failed': child[keyMapping(childCol)]==='FAILED',
+                        'reset-column-value-notOk': child[keyMapping(childCol)]==='NOT OK'
+                        }"
+                      > {{ child[keyMapping(childCol)] }} </td>
+                      }
+                    </ng-container>
+                  }
+                  <tr mat-header-row *matHeaderRowDef="childColumns"></tr>
+                  <tr mat-row *matRowDef="let child; columns: childColumns;" (click)="rowClick(child, $event)"></tr>
+                </table>
+                @if (childDataLength[element.monId] >= childTableLimit()) {
+                  <div class="view-more" (click)="viewMore(expandedRow[element.monId], $event)">View More
+                  </div>                    
+                }
+              </div>
+            </div>
+          }
+        </td>
+      </ng-container>
+     
+      <tr class="child-detail-row" mat-row *matRowDef="let row; columns: ['expandedDetail'];" [hidden]="expandedRow[row.monId] == null"></tr>  
+  </table>
+ 
+  @if(enablePagination) {
+    <div style="margin-bottom: 10px;">
+      <mat-paginator
+        [length]="totalRecords"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        showFirstLastButtons
+        aria-label="Select page"
+        (page)="onPaginateChange($event)"
+      >
+      </mat-paginator>
+    </div>
+  }
+</div>

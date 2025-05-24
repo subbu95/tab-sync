@@ -1,0 +1,66 @@
+<mat-form-field class="form-field {{ size }} {{bgColor}}" *ngIf="!isStringList"
+    [ngClass]="{'dropdown-while-selecting':selected}">
+    <mat-select panelClass="panel {{ size }}" [value]="selected" #matSelect [niqTooltip]="matSelect.triggerValue"
+        [formControl]="control" (valueChange)="selectionChange($event)" (openedChange)="onOpenedChange($event)">
+        <mat-select-trigger *ngIf="fieldName && fieldName === 'couCode' && selectedCountry"
+            [innerHtml]="selectedCountry[valueKey] | countryFlag : selectedCountry[labelKey]">
+        </mat-select-trigger>
+        <div class="search-container" (click)="$event.stopPropagation()">
+            <niq-icon [size]="'x-small'" [iconName]="'search'" [state]="'primary'"></niq-icon>
+            <input id="matCustomInput" type="text" autocomplete="off" matInput #matInput="matInput" placeholder="Search..."
+              [(ngModel)]="searchText" (keydown)="$event.stopPropagation()" />
+          </div>
+        <mat-option class="mat-light" value="" *ngIf="isDefaultLabelRequired">{{ defaultLabelText }}</mat-option>
+        <mat-optgroup *ngIf="(filteredOptions()).length == 0">
+            <div>No results found!</div>
+        </mat-optgroup>
+        @for (menu of filteredOptions(); track menu) {
+        <mat-option *ngIf="!fieldName || (fieldName && fieldName !== 'couCode')" class="mat-light" [value]="menu[valueKey]"
+            niqTooltip="{{ menu[labelKey] }}">
+            @if (filterdropdownWidth) {
+            {{ menu[labelKey] }}
+            }
+            @else {
+            {{ menu[labelKey] | truncate}}
+            }
+        </mat-option>
+        <mat-option *ngIf="fieldName && fieldName === 'couCode'" class="mat-light" [value]="menu[valueKey]"
+            [innerHtml]="menu[valueKey] | countryFlag : menu[labelKey]" niqTooltip="{{ menu[labelKey] }}">
+            {{ menu[labelKey] }}
+        </mat-option>
+        }
+    </mat-select>
+    <niq-icon matSuffix state="primary" size="small"
+        [ngClass]="{'dropdown-icon-while-selecting':iconName==='chevron-up'}" [iconName]="iconName" colorTheme="light"
+        class="custom-arrow"></niq-icon>
+</mat-form-field>
+
+<mat-form-field class="form-field {{ size }} {{bgColor}}" *ngIf="isStringList" [ngClass]="{'dropdown-while-selecting':selected}">
+    <mat-select panelClass="panel {{ size }}" [value]="selected" #matSelect [niqTooltip]="matSelect.triggerValue"
+        [formControl]="control" (valueChange)="selectionChange($event)" (openedChange)="onOpenedChange($event)">
+        <mat-select-trigger *ngIf="fieldName && fieldName === 'couCode' && selectedCountry"
+            [innerHtml]="selectedCountry.toString() | countryFlag : selectedCountry.toString()">
+        </mat-select-trigger>
+        <div class="search-container" (click)="$event.stopPropagation()">
+          <niq-icon [size]="'x-small'" [iconName]="'search'" [state]="'primary'"></niq-icon>
+          <input id="matCustomInput" type="text" autocomplete="off" matInput #matInput="matInput" placeholder="Search..."
+            [(ngModel)]="searchText" (keydown)="$event.stopPropagation()" />
+        </div>
+        <mat-option class="mat-light" value="" *ngIf="isDefaultLabelRequired">{{ defaultLabelText }}</mat-option>
+        <mat-optgroup *ngIf="(filteredOptions()).length == 0">
+          <div>No results found!</div>
+        </mat-optgroup>
+        @for (menu of filteredOptions(); track menu) {
+        <mat-option *ngIf="!fieldName || (fieldName && fieldName !== 'couCode')" class="mat-light" [value]="menu"
+            niqTooltip="{{ menu }}">
+            {{ menu }}
+        </mat-option>
+        <mat-option *ngIf="fieldName && fieldName === 'couCode'" class="mat-light" [value]="menu"
+            [innerHtml]="menu.toString() | countryFlag : menu.toString()" niqTooltip="{{ menu }}">
+        </mat-option>
+        }
+    </mat-select>
+    <niq-icon matSuffix state="primary" size="small"
+        [ngClass]="{'dropdown-icon-while-selecting':iconName==='chevron-up'}" [iconName]="iconName" colorTheme="light"
+        class="custom-arrow"></niq-icon>
+</mat-form-field>

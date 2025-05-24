@@ -1,0 +1,61 @@
+<header class="screenHeader">
+    <div class="screenHeaderTitle">
+        <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'small'"
+            [iconName]="screenHeaderComponentDetails['back']['actionIconName']" [position]="'top'"
+            [colorTheme]="'light'" [tooltipType]="'simple'"
+            [label]="screenHeaderComponentDetails['back']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+            [showArrow]="true" [showTooltip]="true" [isMouseOver]="false"
+            (click)="returnToDashboard()"></niq-icon-button>
+        <h2>{{screenHeaderComponentDetails['screenTitle']}}</h2>
+    </div>
+    <div class="screenHeaderAction">
+        @if (!isLoading && dataArray && dataArray.length > 0) {
+    <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+        [iconName]="screenHeaderComponentDetails['refresh']['actionIconName']" [position]="'top'"
+        [colorTheme]="'light'" [tooltipType]="'simple'"
+        [label]="screenHeaderComponentDetails['refresh']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+        [showArrow]="true" [showTooltip]="true" [isMouseOver]="false" (click)="onActionClick('refresh')"></niq-icon-button>
+        <span></span>
+        <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+            [iconName]="screenHeaderComponentDetails['download']['actionIconName']" [position]="'top'"
+            [colorTheme]="'light'" [tooltipType]="'simple'"
+            [label]="screenHeaderComponentDetails['download']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+            [showArrow]="true" [showTooltip]="true" [isMouseOver]="false" (click)="onDownload()"></niq-icon-button>
+        <span></span>
+        <div class="screenHeaderFilterActions">
+            <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+                [iconName]="screenHeaderComponentDetails['filter']['actionIconName']" [position]="'top'"
+                [colorTheme]="'light'" [tooltipType]="'simple'"
+                [label]="screenHeaderComponentDetails['filter']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+                [showArrow]="true" [showTooltip]="true" [isMouseOver]="false"
+                (click)="onActionClick('filter')"></niq-icon-button>
+            <niq-chip *ngIf="screenHeaderComponentDetails['reset']['isFilterReset']" type="input" [toggles]="false"
+                [active]="true" (click)="onActionClick('reset')">{{
+                screenHeaderComponentDetails['reset']['actionLabelName'] }}</niq-chip>
+        </div>
+        }
+        @else if (!isLoading && dataArray && dataArray.length === 0) {
+       <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+            [iconName]="screenHeaderComponentDetails['refresh']['actionIconName']" [position]="'top'"
+            [colorTheme]="'light'" [tooltipType]="'simple'"
+            [label]="screenHeaderComponentDetails['refresh']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+            [showArrow]="true" [showTooltip]="true" [isMouseOver]="false" (click)="onActionClick('refresh')"></niq-icon-button>
+            <span></span>
+        <niq-icon-button *ngIf="!isLoading && dataArray && dataArray.length === 0" [state]="'disabled'" [mode]="'light'"
+            [type]="'primary'" [size]="'medium'" [iconName]="screenHeaderComponentDetails['download']['actionIconName']"
+            [position]="'top'" [isMouseOver]="false"></niq-icon-button>
+        <span></span>
+        <div class="screenHeaderFilterActions">
+            <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'medium'"
+                [iconName]="screenHeaderComponentDetails['filter']['actionIconName']" [position]="'top'"
+                [colorTheme]="'light'" [tooltipType]="'simple'"
+                [label]="screenHeaderComponentDetails['filter']['actionLabelName']" [delay]="0" [left]="0" [top]="0"
+                [showArrow]="true" [showTooltip]="true" [isMouseOver]="false"
+                (click)="onActionClick('filter')"></niq-icon-button>
+            <niq-chip *ngIf="screenHeaderComponentDetails['reset']['isFilterReset']" type="input" [toggles]="false"
+                [active]="true" (click)="onActionClick('reset')">{{
+                screenHeaderComponentDetails['reset']['actionLabelName'] }}</niq-chip>
+        </div>
+        }
+    </div>
+</header>

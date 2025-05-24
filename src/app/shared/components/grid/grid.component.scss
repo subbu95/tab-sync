@@ -1,0 +1,82 @@
+.toggle-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.toggle-button span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.view-more {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-more:hover {
+  background: #0056b3;
+}
+
+.mat-sort-header {
+  background-color: #E0E2E7 !important;
+}
+
+.btn-outline-primary {
+  border: 1px solid #0d6efd;
+}
+
+.close {
+  border: none;
+  background: none;
+}
+
+.badge {
+  color: black;
+}
+
+.item-container {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.icons {
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  display: flex;
+  gap: 10px;
+  background-color: #eee;
+
+}
+
+/* .icons i {
+  cursor: pointer;
+  font-size: 20px;
+} */
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  
+.icons button {
+  cursor: pointer;
+}
+
+.actions-cell {
+  overflow: visible;
+}
+
+.mat-sort-header {
+  background-color: #E0E2E7 !important;
+}

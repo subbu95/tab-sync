@@ -1,0 +1,83 @@
+:root {
+    --niq-font: "aktiv-grotesk", sans-serif;
+    --screenHeader-width: 100%;
+    --screenHeader-height: 70px;
+    --screenHeader-padding: 15px 0px 15px 0px;
+    --screenHeader-gap: 15px !important;
+    --screenHeaderTitle-width: 90%;
+    --screenHeaderTitle-gap: 15px;
+    --screenHeaderTitle-margin-top: 16px;
+    --screenHeaderTitle-font-weight: 600;
+    --screenHeaderTitle-font-size: 20px;
+    --screenHeaderAction-width: 10%;
+    --screenHeaderAction-height: 40px;
+    // --screenHeaderAction-niq-button-color: #2D6DF6;
+    --screenHeaderAction-niq-button-border: 1px solid #D2D2D2;
+    --screenHeaderAction-niq-button-width: 32px;
+    --screenHeaderAction-niq-button-rotate: -90deg;
+
+}
+
+.screenHeader {
+    display: flex;
+    width: var(--screenHeader-width);
+    height: var(--screenHeader-height);
+    padding: var(--screenHeader-padding);
+    gap: var(--screenHeader-gap);
+    font-family: var(--niq-font) !important;
+
+    .screenHeaderTitle {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        gap: 15px;
+
+        h2 {
+            margin-top: 16px;
+            font-weight: 600;
+            font-size: 20px;
+            font-family: var(--niq-font) !important;
+        }
+    }
+
+    .screenHeaderAction {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: var(--screenHeaderAction-height);
+
+        niq-icon-button {
+            --icon-button-ow-color: #2D6DF6;
+        }
+
+        span {
+            border: var(--screenHeaderAction-niq-button-border);
+            width: var(--screenHeaderAction-niq-button-width);
+            rotate: var(--screenHeaderAction-niq-button-rotate);
+        }
+
+        .screenHeaderFilterActions {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 40px;
+            gap: 5px;
+
+            niq-chip {
+                --chip-ow-font-size: 13px;
+                --chip-ow-padding: 4px 12px 4px 12px;
+                --chip-ow-active-background-color: #E7EEFF;
+                --chip-ow-gap: 8px;
+                font-weight: 400;
+
+                niq-icon {
+                    --icon-ow-color: #AA213F;
+                }
+            }
+        }
+    }
+}
+
+main {
+    padding: 0px !important;
+}

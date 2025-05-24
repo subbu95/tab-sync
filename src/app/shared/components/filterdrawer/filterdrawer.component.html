@@ -1,0 +1,141 @@
+<div class="filter-popup">
+    <div class="filter-body">
+        <form [formGroup]="filterForm">
+            <!-- Dropdown Field -->
+            <ng-container *ngFor="let dropDownField of filterFieldDetails['dropDown'];index as i">
+                <label class="filterDropDownFieldLabel" for="dropDownField['fieldName']">{{
+                    dropDownField['fieldName'].charAt(0).toUpperCase() + dropDownField['fieldName'].slice(1) }}</label>
+            <div #filterdropdownField>
+                <eclipse-dropdown class="filterDropDownField" [menuItems]="dropDownField['fieldOptions']"
+                    [ngClass]="{'filterDropDownField-mat-mdc-select': !filterForm.value[dropDownField['formGroupKeyName']]}"
+                    [valueKey]="dropDownField['fieldOptionValueKeyName']"
+                    [labelKey]="dropDownField['fieldOptionLabelKeyName']"
+                    [defaultLabelText]="dropDownField['fieldOptions'] && dropDownField['fieldOptions'].length === 0 ? 'No '+dropDownField['fieldName'].toLocaleLowerCase() : 'Select '+dropDownField['fieldName'].toLocaleLowerCase()"
+                    [fieldName]="dropDownField['formGroupKeyName']"
+                    [formControl]="formGroup[dropDownField['formGroupKeyName']]"
+                    [filterdropdownWidth] ="filterdropdownWidth" 
+                    (changeEmitter)="onFieldOptionChange('dropDown',$event,dropDownField)">
+                </eclipse-dropdown>
+            </div>
+            </ng-container>
+            <!-- DataList Field -->
+            <ng-container *ngFor="let dataListField of filterFieldDetails['dataList'];index as i">
+                <div class="filterDataListField">
+                    <label class="filterDataListFieldLabel" for="dataListField['fieldName']">{{
+                        dataListField['fieldName'] }}</label>
+                    <eclipse-datalist id="dataListField['fieldName']" [menuItems]="dataListField['fieldOptions']"
+                        [valueKey]="dataListField['fieldOptionValueKeyName']"
+                        [labelKey]="dataListField['fieldOptionLabelKeyName']" [listname]="dataListField['fieldName']"
+                        [fieldName]="dataListField['formGroupKeyName']"
+                        [formControl]="formGroup[dataListField['formGroupKeyName']]"
+                        (change)="onFieldOptionChange('dataList',$event,dataListField)"
+                        (changeEmitter)="onFieldOptionChange('dataList',$event,dataListField)"
+                        (keyChangeEmitter)="onDataListValueChange($event,dataListField)">
+                    </eclipse-datalist>
+                </div>
+            </ng-container>
+            <!-- Text Field -->
+            <ng-container *ngFor="let textField of filterFieldDetails['text']">
+                <div class="filterTextField">
+                    <niq-text-field [label]="textField['fieldName']" [value]="textField['fieldValue']"
+                        [errorMessage]="''" [error]="false" [helperMessage]="''" [helper]="true" [onWhite]="true"
+                        [size]="'large'" [suffixOn]="false" [prefixOn]="false" [readonly]="false"
+                        [placeholder]="'Type ' + textField['fieldName'] + ' here'" [inputType]="'text'" [isDropDown]="false"
+                        [autofocus]="false" [textOverflow]="'default'"
+                        [formControl]="formGroup[textField['formGroupKeyName']]">
+                    </niq-text-field>
+                </div>
+            </ng-container>
+            <!-- Radio Buttons -->
+            <div class="filterRadioField" *ngFor="let radioField of filterFieldDetails['radio']">
+                <label class="filterRadioFieldLabel" for="{{ radioField['fieldName'] }}">{{ radioField['fieldName']
+                    }}</label>
+                <niq-radio-group id="{{ radioField['fieldName'] }}" orientation="horizontal"
+                    [formControl]="formGroup[radioField['formGroupKeyName']]">
+                    <niq-radio-button size="medium" [value]="radioOption[radioField['fieldOptionValueKeyName']]"
+                        *ngFor="let radioOption of radioField['fieldOptions']">
+                        {{ radioOption[radioField['fieldOptionLabelKeyName']] }}
+                    </niq-radio-button>
+                </niq-radio-group>
+            </div>
+            <!-- Date Range Fields -->
+            <div class="filterDateRangeContainer" *ngFor="let dateField of filterFieldDetails['date'];index as i">
+                <label for="dateRange">{{ dateField['fieldName'] }}</label>
+                <div class="filterDateFields">
+                    <div>
+                        <mat-form-field>
+                            <mat-datepicker-toggle matIconPrefix [for]="fromDatePicker">
+                                <niq-icon matDatepickerToggleIcon state="primary" size="small" iconName="calendar"
+                                    colorTheme="light"></niq-icon>
+                            </mat-datepicker-toggle>
+                            <input matInput [matDatepicker]="fromDatePicker" [max]="dateFieldMinandMax[dateField['formGroupFromKeyName']]"
+                                [formControl]="formGroup[dateField['formGroupFromKeyName']]" placeholder="Date from" 
+                                (dateChange)="onDateFieldChange(dateField['formGroupFromKeyName'],dateField['formGroupToKeyName'])"/>
+                            <mat-datepicker #fromDatePicker></mat-datepicker>
+                            <niq-icon state="primary" size="small" iconName="close" colorTheme="light" matSuffix
+                                (click)="clearFilterFields(dateField['formGroupFromKeyName'],dateField['fromFieldDefaultValue'])"></niq-icon>
+                        </mat-form-field>
+                    </div>
+                    <span>To</span>
+                    <div>
+                        <mat-form-field>
+                            <mat-datepicker-toggle matIconPrefix [for]="toDatePicker">
+                                <niq-icon matDatepickerToggleIcon state="primary" size="small" iconName="calendar"
+                                    colorTheme="light"></niq-icon>
+                            </mat-datepicker-toggle>
+                            <input matInput [matDatepicker]="toDatePicker" [min]="dateFieldMinandMax[dateField['formGroupToKeyName']]"
+                                [formControl]="formGroup[dateField['formGroupToKeyName']]" placeholder="Date to" 
+                                (dateChange)="onDateFieldChange(dateField['formGroupFromKeyName'],dateField['formGroupToKeyName'])"/>
+                            <mat-datepicker #toDatePicker></mat-datepicker>
+                            <niq-icon state="primary" size="small" iconName="close" colorTheme="light" matSuffix
+                                (click)="clearFilterFields(dateField['formGroupToKeyName'])"></niq-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <!-- Flag field -->
+            <div class="filterCheckBoxField" *ngFor="let checkBoxField of filterFieldDetails['checkBox'];index as i">
+                <niq-checkbox [size]="'medium'" [checked]="checkBoxField['fieldValue']" [error]="false"
+                    [indeterminate]="false" [arrow]="false" [formControl]="formGroup[checkBoxField['formGroupKeyName']]"
+                    (checkedChange)="checkedChange($event,checkBoxField)">
+                    {{ checkBoxField['fieldName'] }}
+                </niq-checkbox>
+            </div>
+            <!-- TextArea Field -->
+            <div class="filterTextAreaField" *ngFor="let textAreaField of filterFieldDetails['textArea'];index as i">
+                <label for="textAreaField['fieldName']">{{ textAreaField['fieldName'] }}</label>
+                <textarea id="textAreaField['fieldName']" matInput
+                    [formControl]="formGroup[textAreaField['formGroupKeyName']]" placeholder=""></textarea>
+            </div>
+            <!-- Popup Field -->
+            <!-- <ng-container *ngFor="let popupField of filterFieldDetails['popup']">
+                <div class="filterPopupField">
+                    <niq-text-field [label]="popupField['fieldName']" [value]="popupField['fieldValue']" [errorMessage]="''" [error]="false"
+                        [helperMessage]="''" [helper]="true" [onWhite]="true" [size]="'large'" [suffixOn]="false"
+                        [prefixOn]="false" [readonly]="false" [placeholder]="'Enter ' + popupField['fieldName']"
+                        [inputType]="'text'" [isDropDown]="false" [autofocus]="false" [textOverflow]="'default'"
+                        [formControl]="formGroup[popupField['formGroupKeyName']]">
+                    </niq-text-field>
+                    <niq-icon state="primary" size="small" [iconName]="popupField['popupOpenIconName']" colorTheme="light"
+                    (click)="popupFieldDialogOpen()"></niq-icon>
+                    <niq-icon state="primary" size="small" iconName="close" colorTheme="light"
+                    (click)="clearFilterFields(popupField['formGroupKeyName'])"></niq-icon>
+                </div>
+            </ng-container> -->
+            <!-- <ng-container *ngFor="let popupField of filterFieldDetails['popup']">
+                <div class="filterPopupField">
+                    <niq-icon state="primary" size="small" iconName="chevron-left" colorTheme="light"></niq-icon>
+                    <niq-icon state="primary" size="small" [iconName]="popupField['popupOpenIconName']" colorTheme="light"
+                    (click)="popupFieldDialogOpen()"></niq-icon>
+                    <label class="filterPopupFieldLabel">{{ popupField['fieldName'] }}</label>
+                </div>
+            </ng-container> -->
+        </form>
+    </div>
+    <div class="filter-footer">
+        <button class="filter_button reset" (click)="resetFilters()">Reset</button>
+        <button class="filter_button apply" (click)="applyFilters()">Apply</button>
+    </div>
+</div>
+<!-- <niq-dialog #popupFieldDialogBox [size]="'large'" [closeOnEsc]="false" [closeOnClickOutside]="false"
+    (close)="onCloseDialogEvent()"></niq-dialog> -->

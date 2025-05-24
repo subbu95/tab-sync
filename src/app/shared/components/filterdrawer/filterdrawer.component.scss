@@ -1,0 +1,379 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+    --niq-font: "aktiv-grotesk", sans-serif !important;
+    --white-color: #fff;
+    --border-color: #b9b6b6;
+    --blue-color: #007bff;
+    --text-color: #262626;
+    --font-size: 15px !important;
+    --font-weight-bold: bold;
+    --padding-medium: 15px;
+    --height-medium: 42px;
+    --height-small: 40px;
+    --height-large: 91.8%;
+    --width-small: 100%;
+    --margin-large: 0;
+    --z-index-default: 10;
+    --z-index-overlay: 1200;
+    --border-width: 1px;
+    --button-width: 20%;
+    --button-padding: 12px 16px 12px 16px;
+    --filterDropDownField-width: 340px;
+    --filterDropDownField-height: 32px;
+    --filterField-backgroung-color: #F4F4F4;
+    --filterRadioField-width: 308px;
+    --filterRadioField-height: 36px;
+    --filterDateField-width: 140px;
+    --filterDateField-height: 32px;
+    --filterTextField-width: 307px;
+    --filterTextField-height: 32px;
+    --filterDataListField-width: 307px;
+    --filterDataListField-height: 32px;
+    --filterTextAreaField-width: 308px;
+}
+
+.filter-popup {
+    position: fixed;
+    height: var(--height-large);
+    width: 336px;
+    font-family: var(--niq-font);
+    top: 20;
+    right: 0;
+    background: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-index-default);
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--white-color);
+
+        .filter-title {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size);
+            font-weight: var(--font-weight-bold);
+
+            .filter-icon {
+                font-weight: var(--font-weight-bold);
+            }
+
+            niq-icon {
+                margin-left: 0.9rem;
+                margin-right: 0.5rem;
+            }
+        }
+
+    }
+
+    .filter-body {
+        flex: 1;
+        padding: 0px 10px 10px 15px;
+        overflow-y: auto;
+
+        .filterDropDownFieldLabel{
+            font-size: var(--font-size);
+            color: #525252;
+        }
+
+        .filterDropDownField {
+            background-color: #f4f4f4;
+            --mdc-filled-text-field-container-color: #f4f4f4;
+            --mat-select-enabled-trigger-text-color: #262626;
+            --mat-select-trigger-text-line-height: 20px !important;
+            --mat-form-field-state-layer-color:#f4f4f4;
+            mat-form-field {
+                width: var(--filterDropDownField-width);
+                height: var(--filterDropDownField-height);
+                color: var(--text-color);
+                background-color: var(--filterField-backgroung-color);
+                border-bottom: var(--border-width) solid var(--border-color);
+                margin-bottom: 15px;
+
+                .mat-mdc-select-value {
+                    font-size: var(--font-size);
+                }
+                .mat-mdc-select {
+                    margin-left: -3%;
+                }
+                .mat-mdc-form-field-infix {
+                    padding-top: 5px !important;
+                }
+
+                .mdc-line-ripple {
+                    opacity: 0;
+                }
+            }
+        }
+
+        .filterDropDownField-mat-mdc-select {
+            .mat-mdc-select {
+                .mat-mdc-select-min-line{
+                    color: #A6A6A6;
+                }
+            }
+        }
+
+        .filterRadioField {
+            height: var(--filterRadioField-height);
+            width: var(--filterRadioField-width);
+            margin-bottom: 15px;
+            color: var(--text-color);
+
+            .filterRadioFieldLabel {
+                font-weight: var(--font-weight-bold);
+                font-size: var(--font-size);
+                display: block;
+            }
+        }
+
+        .filterDateRangeContainer {
+            margin-bottom: 15px;
+
+            label {
+                font-size: var(--font-size);
+                font-weight: var(--font-weight-bold);
+                display: block;
+                text-align: left;
+                color: var(--text-color);
+            }
+
+            .filterDateFields {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                mat-form-field {
+                    width: var(--filterDateField-width);
+                    height: var(--filterDateField-height);
+                    font-size: 14px;
+                    color: var(--text-color);
+                    background-color: var(--filterField-backgroung-color);
+                    border-bottom: var(--border-width) solid var(--border-color);
+
+                    .mat-mdc-form-field-icon-prefix {
+                        bottom: 11px;
+                        right: 12px;
+                    }
+
+                    .mat-mdc-form-field-infix {
+                        bottom: 11px;
+                        right: 24px;
+                    }
+
+                    .mat-mdc-form-field-icon-suffix {
+                        bottom: 11px;
+                        right: 12px;
+                        margin: -10px;
+                    }
+
+                    .mat-mdc-form-field-subscript-wrapper {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .filterTextField {
+            margin-bottom: 15px;
+
+            niq-text-field {
+                width: var(--filterRadioField-width);
+
+                .label {
+                    font-size: var(--font-size);
+                    color: #525252;
+                    background-color: white;
+                }
+
+                input {
+                    height: var(--filterTextField-height);
+                    background-color: var(--filterField-backgroung-color);
+                    color: var(--text-color) !important;
+                }
+            }
+        }
+
+        .filterDataListField {
+            margin-bottom: 15px;
+            --mdc-filled-text-field-input-text-placeholder-color:#A6A6A6;
+
+            .filterDataListFieldLabel {
+                font-size: var(--font-size);
+                color: #525252;
+                display: block;
+            }
+
+            mat-form-field {
+                width: var(--filterDataListField-width);
+                height: var(--filterDataListField-height);
+                background-color: var(--filterField-backgroung-color);
+                color: var(--text-color);
+                border-bottom: var(--border-width) solid var(--border-color);
+
+                &:hover {
+                    border-bottom: 1px solid black !important;
+                }
+
+                input {
+                    margin-left: -2%;
+                }
+
+                .mat-mdc-form-field-infix {
+                    padding-top: 5px !important;
+                }
+
+                .mat-mdc-form-field-subscript-wrapper {
+                    margin-bottom: -7%;
+                }
+
+                .mdc-line-ripple {
+                    opacity: 0;
+                }
+            }
+        }
+
+        .filterCheckBoxField {
+            margin-bottom: 15px;
+        }
+
+        .filterTextAreaField {
+            margin-bottom: 15px;
+
+            label {
+                font-size: var(--font-size);
+                font-weight: var(--font-weight-bold);
+                display: block;
+                text-align: left;
+                color: var(--text-color);
+            }
+
+            textarea {
+                width: var(--filterTextAreaField-width);
+            }
+        }
+
+        .filterPopupField {
+            display: flex;
+            // align-items: end;
+            align-items: center;
+            // justify-content: space-between;
+            margin-bottom: 15px;
+            border: 1px solid #007bff;
+            padding: 6px;
+
+            .filterPopupFieldLabel {
+                font-size: var(--font-size);
+                color: #4F4F4F;
+                display: block;
+                margin: 0px 0px 0px 8px;
+            }
+
+            // niq-text-field {
+            //     width: 266px;
+            //     .label {
+            //         font-size: var(--font-size);
+            //         color: #4F4F4F;
+            //         background-color: white;
+            //     }
+            //     input {
+            //         height: 32px;
+            //         border: 1px solid black;
+            //         background-color: white;
+            //         color: var(--text-color) !important;
+            //     }
+            // }
+        }
+
+    }
+
+    .filter-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: var(--padding-medium);
+        border-top: var(--border-width) solid #ddd;
+        gap: 20px;
+
+        .filter_button {
+            padding: var(--button-padding);
+            display: flex;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            font-size: 13px;
+            cursor: pointer;
+            width: var(--button-width);
+            border-radius: 2px;
+        }
+
+        .filter_button.reset {
+            background: var(--white-color);
+            color: var(--blue-color);
+            border: var(--border-width) solid var(--blue-color);
+
+            &:hover {
+                background: var(--blue-color);
+                color: var(--white-color);
+                border: var(--border-width) solid var(--blue-color);
+            }
+        }
+
+        .filter_button.apply {
+            background: var(--blue-color);
+            color: var(--white-color);
+            border: var(--border-width) solid var(--blue-color);
+
+            &:hover {
+                background: #105cad;
+                color: var(--white-color);
+                border: var(--border-width) solid var(--blue-color);
+            }
+        }
+
+    }
+}
+
+// commented these classes as they are over riding the eclipse athena dialog over lay
+// and position(Middle of the screen)
+//
+// .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+//     opacity: 0;
+// }
+
+// .cdk-global-overlay-wrapper {
+//     top: 52px;
+// }
+
+.rbu-ini-screen-filter-height {
+    height: 78vh !important;
+}
+
+.sidepanel-container.open {
+    width: 336px;
+    // margin-top: 27.5%;
+
+    .filter {
+        font-weight: bold;
+    }
+
+    .header {
+        margin-left: -2%;
+    }
+}
+
+.snackbar-wrapper.container-pop-in {
+    z-index: var(--z-index-overlay);
+}
+
+div.panel {
+    width: 308px;
+    max-height: 144px !important;
+    position: absolute !important;
+    background-color: #FFFFFF !important;
+    --mat-option-selected-state-label-text-color: #262626; 
+    --mat-option-label-text-color: #262626;
+    --item-ow-min-height: 36px;
+    padding: 0px !important;
+}

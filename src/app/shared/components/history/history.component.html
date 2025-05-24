@@ -1,0 +1,36 @@
+<div class="historyPage">
+    <!-- header -->
+    <header class="historyPageHeader">
+        <niq-icon-button [state]="'default'" [mode]="'light'" [type]="'primary'" [size]="'small'"
+            [iconName]="'arrow-standard-left'" [position]="'top'" [colorTheme]="'light'" [tooltipType]="'simple'"
+            [label]="'Back'" [delay]="0" [left]="0" [top]="0" [showArrow]="true" [showTooltip]="true"
+            [isMouseOver]="false" (click)="goBack()"></niq-icon-button>
+        <h2>{{historyScreenDetails['screenTitle']}}- history</h2>
+    </header>
+
+    <!-- Filter Fields Shown -->
+    <div class="displayFields">
+        <div class="displayFieldValues" *ngIf="historyScreenDetails['filterFieldObject']">
+            <div class="displayField" *ngFor="let key of objectKeys(historyScreenDetails['filterFieldObject'])">
+                <span class="displayKey">{{key}}</span>
+                <span *ngIf="key==='Country'"
+                    [innerHtml]="historyScreenDetails['filterFieldObject'][key].toString() | countryFlag"></span>
+                <span>{{historyScreenDetails['filterFieldObject'][key]}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shown history data in the grid -->
+    <eclipse-common-grid *ngIf="historyScreenDetails['gridDataObject'] && historyScreenDetails['gridDataObject'].length > 0
+            && historyScreenDetails['gridColumnNames']" 
+        [columns]="historyScreenDetails['gridColumnNames']"
+        [showAction]="false" 
+        [enablePagination]="false" 
+        [enableSorting]="false"
+        [data]="historyScreenDetails['gridDataObject']"
+        (rowClickEvent)="onRowClick($event)">
+    </eclipse-common-grid>
+</div>
+
+<eclipse-athena-dialog [title]="title" [monId]="monId" [detailsPath]="detailsPath"
+  (confirmEvent)="deleteConfirmation($event)"></eclipse-athena-dialog>
