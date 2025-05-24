@@ -1,0 +1,704 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "cip-eclipse": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "eclipse",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/cip-eclipse",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/cuic-athena-core/",
+                "output": "/assets/i18n/@nielsen/cuic-athena-core"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-rc-features/",
+                "output": "/assets/i18n/@nielsen/crf-rc-features"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-rc-central/",
+                "output": "/assets/i18n/@nielsen/crf-rc-central"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-lp-common/",
+                "output": "/assets/i18n/@nielsen/crf-lp-common"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-rv-common/",
+                "output": "/assets/i18n/@nielsen/crf-rv-common"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-rb-common/",
+                "output": "/assets/i18n/@nielsen/crf-rb-common"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-global-nav/",
+                "output": "/assets/i18n/@nielsen/crf-global-nav"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/connect-chart-library/",
+                "output": "/assets/i18n/@nielsen/connect-chart-library"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-ui-components/",
+                "output": "assets/i18n/@nielsen/crf-ui-components"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-omni-templates/",
+                "output": "/assets/i18n/@nielsen/crf-omni-templates"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/crf-ca-report-templates/",
+                "output": "/assets/i18n/@nielsen/crf-ca-report-templates"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@nielseniq/crf-translate/assets/i18n/global-translate/",
+                "output": "/assets/i18n/@nielsen/global-translate"
+              }
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
+            "ecldevl1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldevl1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqal1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqal1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqnax1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqnax1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclstgx1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclstgx1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclcgxz1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclcgxz1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclcnt01": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclcnt01.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclcrt8": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclcrt8.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldevf1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldevf1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldevl2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldevl2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldevl3": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldevl3.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldevl4": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldevl4.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldgtxz1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldgtxz1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecldnax1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecldnax1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclmig2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclmig2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclmigl1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclmigl1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclpgtx1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclpgtx1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclphk01": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclphk01.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclphk02": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclphk02.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclplc01": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclplc01.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclpnax1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclpnax1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclpocna": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclpocna.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclprdap": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclprdap.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclprdeu": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclprdeu.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclprel1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclprel1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqaf2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqaf2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqal2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqal2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqal3": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqal3.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqal4": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqal4.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqgxz1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqgxz1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqnax2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqnax2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclstgeu": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclstgeu.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecltral3": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecltral3.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecltrnl1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecltrnl1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecltrnl2": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecltrnl2.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "ecluatl1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ecluatl1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclulc01": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclulc01.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclunax1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclunax1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            },
+            "eclqaf1": {
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eclqaf1.ts"
+                }
+              ],
+              "baseHref": "/eclipse/app/"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "cip-eclipse:build:production"
+            },
+            "development": {
+              "buildTarget": "cip-eclipse:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "cip-eclipse:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": ["src/assets"],
+            "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false,
+    "schematicCollections": ["angular-eslint"]
+  }
+}

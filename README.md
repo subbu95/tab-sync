@@ -1,1 +1,1 @@
-# tab-sync
+# cip-eclipse-ux
