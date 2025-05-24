@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/cdk/overlay-prebuilt.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "./../node_modules/@nielseniq//athena-core/assets/fonts/athena-core-base.scss";
+@import "./../node_modules/@nielseniq/athena-core/assets/styles/athena-styles.css";
+
+html, body { height: 100%; }
+
+:root {
+  --darkBg: #060642;
+  --primaryBtn: #386af3;
+  --borderGreyColor: #e6e6e6;
+}
+
+* {
+  @font-face {
+      font-family: 'aktiv grotesk', sans-serif;
+      src:
+        url('https://uat.cdn.gateway.nielseniq.io/common/fonts/AktivGrotesk_W_Rg.woff2') format('woff2 supports variations'),
+        url('https://uat.cdn.gateway.nielseniq.io/common/fonts/AktivGrotesk_W_Rg.woff2') format('woff2-variations'),
+        url('https://uat.cdn.gateway.nielseniq.io/common/fonts/AktivGrotesk_W_Rg.woff') format('woff'),
+        url('https://uat.cdn.gateway.nielseniq.io/common/fonts/AktivGrotesk_Rg.ttf') format('truetype');
+      font-weight: normal;
+    }
+  font-optical-sizing: auto;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+}
+
+.download {
+  cursor: pointer;
+}
+
+.snackbar-container .iconComponent.alert {
+  margin-bottom: 0px;
+}
