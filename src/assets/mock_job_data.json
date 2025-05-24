@@ -1,0 +1,17 @@
+{
+    "status": {
+      "timestamp": "2024-12-06 19:19:36",
+      "responseStatus": "SUCCESS",
+      "responseCode": "200"
+    },
+    "body": {
+      "Company": "ECLDL1",
+      "Node": "lhrlnxecld001",
+      "Uproc": "F_ITMIAS",
+      "Session": "A_GUIIAS",
+      "Management Unit": "E___FRCITL",
+      "Uproc number": 807,
+      "Session number": 104,
+      "Launch ": "0000649"
+    }
+}
