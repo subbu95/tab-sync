@@ -1,0 +1,44 @@
+.dropdown-icon-while-selecting {
+    color:  #2D6DF6 !important;
+}
+
+.custom-arrow {
+    right: 4px;
+    bottom: 10px;
+    gap: 8px;
+    position: static;
+
+    &:hover {
+        color: #2D6DF6 !important;
+    }
+
+    &:active {
+        color: #2D6DF6 !important;
+    }
+}
+
+.usr-icon-padding {
+    padding-bottom: 30px;
+}
+
+.tab-line-list {
+    --tab-line-list-ow-content-border-color: #ADADAD;
+    border: white;
+    background-color: white;
+    padding-right: 0px;
+}
+
+.tab-line-list-orange-color {
+    background-color: #ffa500;
+}
+
+.profile-div-style {
+    padding-top: 10px;
+}
+
+.usr-name-style {
+    display: flex;
+}
+.usr-icon-style {
+    padding-left: 5px;
+}

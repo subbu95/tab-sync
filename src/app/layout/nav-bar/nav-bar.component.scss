@@ -1,0 +1,101 @@
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    color: rgb(0, 0, 0);
+}
+
+.nav-container .tab-line-list{
+    --tab-line-list-ow-content-border-color: #ADADAD;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-container .tab-line-list .gap-fill{
+    min-width: 0px;
+    width: 2000px;
+}
+
+.nav-container .tab-line-list .icon-size{
+    --tab-line-ow-hover-border-color: #2D6DF6;
+}
+
+.nav-container .tab-line-list  .niq-tab-line{
+    --tab-line-ow-font-size: 15px;
+    --tab-line-ow-padding: 11px 16px 11px 16px;
+    --tab-line-ow-color: #4F4F4F;
+    --tab-line-ow-hover-border-color: #2D6DF6;
+}
+
+.dropdown {
+  position: relative;
+  top: 100%;
+  left: 0;
+  background: white;
+  width: 241px;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  border: 1px solid #CCCCCC !important;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.back-button-icon-class:hover {
+  color: var(--icon-ow-color, #029cfd);
+}
+
+
+.menu-title {
+  font-size: 16px;
+  font-weight: 450;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  padding: 5px 0;
+  background: #f8f8f8;
+}
+
+.scrollable-menu {
+  max-height: 85vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  /* Thin scrollbar for Firefox */
+  scrollbar-color: #888 transparent;
+}
+
+.scrollable-menu::-webkit-scrollbar {
+  width: 4px;
+  /* Very thin scrollbar */
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+// .overflow-host {
+//   width: 241px;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+
+::ng-deep #navigationMenu .item-caret-icon:hover {
+  color: #029cfd !important;
+}

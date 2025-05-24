@@ -1,0 +1,24 @@
+<div class="profile-div-style">
+  <div class="usr-name-style">{{userName}}
+    <niq-icon class="usr-icon-style" state="primary" size="small" iconName="account-outline small" colorTheme="light"></niq-icon>
+    <niq-menu class="usr-icon-style" (openedChange)="onOpenedChange($event)" [closeOnActivate]="false">
+      <button  [ngClass]="{'tab-line-list-orange-color':  sessionRunning}" class="tab-line-list" dropdown-trigger>
+        <niq-icon [ngClass]="{'dropdown-icon-while-selecting':iconName==='chevron-up'}" [iconName]="iconName"
+          colorTheme="light" state="primary" size="small" class="custom-arrow" iconName="chevron-down"
+          colorTheme="light"></niq-icon></button>
+      <div dropdown-content>
+        <niq-item style="background-color: white!important;">
+          <niq-icon class="usr-icon-padding" state="primary" size="small" iconName="account-outline small"
+            colorTheme="light"></niq-icon>
+          <div>
+            <strong>Welcome,</strong>{{" " + userName}}<br>
+            {{currentWorkteam + " " +"(" + instructionStatus + ")"}}
+          </div>
+        </niq-item>
+        <niq-item (click)="userLogout($event)"><niq-icon [iconName]="'sign-out'" size="small"
+            class="icon-size"></niq-icon>
+          <span>Sign out</span></niq-item>
+      </div>
+    </niq-menu>
+  </div>
+</div>

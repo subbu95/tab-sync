@@ -1,0 +1,23 @@
+<div class="header-width" id="header-font-family">
+  <div class="header-container" [ngClass]="{'header-background-color':  sessionRunning}">
+    <div class="header-tag d-flex justify-content-start">
+      <button id="logoClick" [ngClass]="{'header-background-color':  sessionRunning}" (click)="redirectToDashboard()" (keyup.enter)="redirectToDashboard()">
+        <img [src]="logoUrl" class="niq-logo-img-size" alt="logo" />
+      </button>
+      <div class="application-container">
+        {{ applicationName }} {{ applicationVersion }} - {{ environment }}
+      </div>
+    </div>
+    <div [ngClass]="sessionRunning ? 'cron-api-text-change': 'cron-api-msg'" class="d-flex justify-content-center">
+      {{cronApiMessage}}
+    </div>
+    <div class="usr-profile-container d-flex justify-content-end">
+      <!-- <eclipse-profile [userName]="userName" [currentWorkteam]="currentWorkteam" [instructionStatus]="instructionStatus" [sessionRunning]="sessionRunning"></eclipse-profile> -->
+      <div>
+        Welcome,{{" " + userName}}<br>
+        {{currentWorkteam + " " +"(" + instructionStatus + ")"}}
+      </div>
+    </div>
+  </div>
+  <eclipse-cron-task (cronApichangeEmitter)="cronApiMessageEmitter($event)"></eclipse-cron-task>
+</div>

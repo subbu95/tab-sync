@@ -1,0 +1,96 @@
+<body>
+  <div class="nav-container">
+    <niq-tab-line-list selected="Instructions" [showUnderline]="true" class="tab-line-list">
+      @for(navMenuItem of leftNavMenuItems; track navMenuItem){
+      @if (data[getMenuKey(navMenuItem)]) {
+      @if (!externalMenuItems.includes(navMenuItem)) {
+        <niq-tab-line size="large" [value]="navMenuItem" class="niq-tab-line"
+            cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+            (click)="openMainMenu(navMenuItem, trigger)">{{ navMenuItem }}
+        </niq-tab-line>
+        <ng-template #firstTemplate cdkConnectedOverlay [cdkConnectedOverlayOrigin]="dynamicSelectedTab" [cdkConnectedOverlayOpen]="isDropdownOpen" (overlayOutsideClick)="closeDropdown()">
+          <div *ngIf="isDropdownOpen" class="dropdown">
+            <button class="back-button" (click)="goBack()" *ngIf="menuStack.length > 0">
+              <niq-icon class="back-button-icon-class" [size]="'x-small'" [iconName]="'arrow-standard-left'" [state]="'primary'"></niq-icon>&nbsp;&nbsp;Return
+            </button>
+            <div *ngIf="selectedMenuTitle !== 'Main Menu'" class="menu-title">&nbsp;&nbsp;{{ selectedMenuTitle }}</div>
+
+            <div class="scrollable-menu">
+              @if (!isLanguageMenu) {
+                <div *ngFor="let item of currentMenu; let i = index">
+                  @if(item.children && item.children.length > 0){
+                    @if(item.menuItemName.length > 27) {
+                      <niq-item (click)="openSubmenu(item, i)" [caret]="true" [noInk]="true" [toggles]="i === activeIndex" niqTooltipPosition="top" [niqTooltipShowArrow]="true" [niqTooltip]="item.menuItemName">
+                        {{ item.menuItemName | truncate : 27 }}
+                      </niq-item>
+                    }@else {
+                      <niq-item (click)="openSubmenu(item, i)" [caret]="true" [noInk]="true" [toggles]="i === activeIndex">
+                        {{ item.menuItemName | truncate : 27 }}
+                      </niq-item>
+                    }
+                  }
+                  @else {
+                    @if(item.menuItemName.length > 27) {
+                    <niq-item (click)="navigateFromMenu(item.url)" [toggles]="i === activeIndex" niqTooltipPosition="top" [niqTooltipShowArrow]="true" [niqTooltip]="item.menuItemName">
+                      {{ item.menuItemName | truncate : 27 }}
+                    </niq-item>
+                    }@else {
+                    <niq-item (click)="navigateFromMenu(item.url)" [toggles]="i === activeIndex">
+                      {{ item.menuItemName | truncate : 27 }}
+                    </niq-item>
+                    }
+                  }
+                </div>
+              } @else {
+                  <div *ngFor="let item of currentLanguageMenu; let i = index">
+                    @if(item.languageName.length > 27) {
+                    <niq-item (click)="setLanguage(item.lanCode)" [toggles]="i === activeIndex" [niqTooltip]="item.languageName" niqTooltipPosition="top"
+                    [niqTooltipShowArrow]="true" (keydown)="navigate1($event)" (keypress)="navigate1($event)" (keyup)="navigate1($event)">
+                      {{ item.languageName | truncate : 27 }}
+                    </niq-item>
+                    }@else {
+                    <niq-item (click)="setLanguage(item.lanCode)" [toggles]="i === activeIndex" (keydown)="navigate1($event)"
+                      (keypress)="navigate1($event)" (keyup)="navigate1($event)">
+                      {{ item.languageName | truncate : 27 }}
+                    </niq-item>
+                    }
+                  </div>
+              }
+            </div>
+          </div>
+        </ng-template>
+      }@else {
+      <niq-tab-line size="large" [value]="navMenuItem" class="niq-tab-line" (click)="redirectToExternal(navMenuItem)">{{
+        navMenuItem }}</niq-tab-line>
+      }
+      }
+      }
+
+      <div class="gap-fill"></div>
+
+      @for(navMenuItem of rightNavMenuItems; track navMenuItem){
+      @if (data[getMenuKey(navMenuItem)]) {
+      @if (!externalMenuItems.includes(navMenuItem) && !languageMenuItems.includes(navMenuItem)) {
+        <niq-tab-line size="large" [value]="navMenuItem" class="niq-tab-line"
+        cdkOverlayOrigin #secondTrigger="cdkOverlayOrigin" (click)="openMainMenu(navMenuItem, secondTrigger)">{{ navMenuItem }}
+        </niq-tab-line>
+      }
+      @else if(externalMenuItems.includes(navMenuItem)){
+      <niq-tab-line size="large" [value]="navMenuItem" class="niq-tab-line" (click)="redirectToExternal(navMenuItem)">{{
+        navMenuItem }}</niq-tab-line>
+      }
+      @else {
+        <niq-tab-line size="large" [value]="navMenuItem" class="niq-tab-line"
+        cdkOverlayOrigin #thirdTrigger="cdkOverlayOrigin" (click)="openMainMenu(navMenuItem, thirdTrigger)">{{ selectedLanguage }}
+        </niq-tab-line>
+      }
+      }
+      }
+      <niq-item (click)="userLogout($event)">
+        <niq-icon [iconName]="'sign-out'" size="small"></niq-icon>
+      </niq-item>
+      <!-- <niq-tab-line [iconName]="'sign-out'" class="icon-size"></niq-tab-line> -->
+    </niq-tab-line-list>
+  </div>
+</body>
+

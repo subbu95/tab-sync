@@ -1,0 +1,112 @@
+:host{
+    display: block;
+    padding: 0px;
+    height: auto;
+    background-color: var(--darkBg);
+    color: #ffffff;
+}
+
+#header-font-family{
+    font-family: 'aktiv grotesk', sans-serif !important;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid #2D6DF6;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.header-tag{
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+
+.niq-logo-img-size{
+    height: 28px;
+    width: 66.45px;
+}
+
+.application-container{
+   font-size: 22px;
+   font-weight: 700;
+   line-height: 30px;
+}
+
+.usr-profile-container{
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    min-width: 100px;
+    height: 40px;
+    line-height: 20px;
+}
+
+.cron-api-msg{
+    padding-top: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    color:white;
+    background-color:white;
+}
+
+.cron-api-text-change{
+    padding-top: 4px;
+    font-weight: 500;
+    font-size: 18px;
+    color:black;
+
+}
+
+.header-background-color{
+    background-color: #ffa500 !important;
+}
+
+@media (max-width: 600px) {
+    .usr-profile-container {
+        position: relative !important;
+        right: 0px !important;
+    }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+    .usr-profile-container {
+        position: relative !important;
+        right: 100px !important;
+    }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+    .usr-profile-container {
+        position: relative !important;
+        right: 0px !important;
+    }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+    .header-width {
+        width: 230vw !important;
+    }
+}
+@media (min-width: 769px) and (max-width: 1199px) {
+    .header-width {
+        width: 100% !important;
+    }
+}
+
+.header-width {
+    width: 100% !important;
+}
+
+#logoClick {
+    background-color: #ffffff;
+  border: none;
+  padding: 0;
+}

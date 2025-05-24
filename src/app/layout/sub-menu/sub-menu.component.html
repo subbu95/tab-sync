@@ -1,0 +1,24 @@
+<div>
+  @if(subMenuItems && subMenuItems.length > 0) {
+  <div>
+  @for(item of subMenuItems; track item){
+     @if(item.children && item.children.length > 0){
+  <niq-menu [subMenu]="true" [activateOnHover]="true" [hasBackdrop]="false" [menuCloseDelay]="300">
+    <niq-item [caret]="true" [noInk]="true" dropdown-trigger>{{
+      item.menuItemName
+    }}</niq-item>
+    <eclipse-sub-menu dropdown-content [subMenuItems]="item.children"></eclipse-sub-menu>
+  </niq-menu>
+  } @else {
+  <niq-item (click)="navigateFromMenu(item.url)">{{ item.menuItemName }}</niq-item>
+  } }
+</div>
+  }
+  @if(languageMenuItems && languageMenuItems.length > 0){
+    <div>
+      @for(item of languageMenuItems; track item){
+        <niq-item (click)="selectLanguage(item.lanCode)">{{ item.languageName }}</niq-item>
+      }
+    </div>
+  }
+</div>
