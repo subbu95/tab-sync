@@ -1,0 +1,10 @@
+<iframe
+  #iframe
+  id="legacyIframe"
+  name="legacyIframe"
+  [src]="sanitizedSrc"
+  (load)="loaderService.hideLoader()"
+  title="legacyIframe"
+  eclipseIframeTracker
+  (iframeClick)="closeMenuDropdown($event)"
+></iframe>

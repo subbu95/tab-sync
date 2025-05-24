@@ -1,0 +1,46 @@
+.psrScreen{
+    padding: 0px 20px 0px 20px;
+}
+.gif-container {
+    width: 150px;
+    height: 189px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8% 40% 0% 44%;
+}
+
+.gif-container .loader-gif {
+    width: 150px;
+    height: 150px;
+}
+
+.caption {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: #2D6DF6;
+}
+
+.err-img-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .error-img {
+        height: 64vh;
+        width: 30%;
+    }
+
+    .err-content {
+        h1 {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        display: flex;
+        flex-direction: column;
+        padding: 0% 0% 0% 4%;
+    }
+}

@@ -1,0 +1,53 @@
+<div class="session-container niq-background-img">
+  <form [formGroup]="sessionForm">
+    <div class="container"
+    [ngStyle]="sessionForm.get('userRole')?.value !== 'POWER_COF' ?
+              {'height': '210px', 'top': '60%'} :
+              {'height': '146px', 'top': '95%'}">
+      <div class="row-container">
+        <div class="fields">Select the work team</div>
+        <eclipse-dropdown
+          class="session-dropdown"
+          [menuItems]="workTeamCollection"
+          [defaultLabelText]="'No workteam'"
+          [valueKey]="'wtmId'"
+          [labelKey]="'wtmShortDescription'"
+          [isStringList]="false"
+          formControlName="workTeam"
+        ></eclipse-dropdown>
+      </div>
+      <div class="row-container" *ngIf="sessionForm.get('userRole')?.value !== 'POWER_COF'">
+        <div class="fields">Select instruction status</div>
+        <eclipse-dropdown
+          class="session-dropdown"
+          [menuItems]="instructionCollection"
+          [valueKey]="'data'"
+          [labelKey]="'label'"
+          [isDefaultLabelRequired]="false"
+          formControlName="instructionStatus"
+        ></eclipse-dropdown>
+      </div>
+      <div class="row-container">
+        <div class="fields">Select the role</div>
+        <eclipse-dropdown
+          class="session-dropdown"
+          [menuItems]="roleCollection"
+          [isStringList]="true"
+          [isDefaultLabelRequired]="false"
+          formControlName="userRole"
+        ></eclipse-dropdown>
+      </div>
+    </div>
+  </form>
+  <niq-button
+    variant="secondary"
+    colorTheme="light"
+    [size]="'large'"
+    class="niq-button"
+    (click)="setSession()"
+    [ngStyle]="{'margin-top': sessionForm.get('userRole')?.value !== 'POWER_COF' ? '35px' : '45px'}"
+  >
+    Select
+  </niq-button>
+</div>
+

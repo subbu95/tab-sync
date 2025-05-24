@@ -1,0 +1,40 @@
+<div class="pmrScreen">
+  <eclipse-screenheader [isLoading]="utilityService.isLoading" [dataArray]="dataArray" [screenHeaderComponentDetails]="screenHeaderComponentDetails" [excelExportApiPath]="excelExportApiPath"></eclipse-screenheader>
+
+  <eclipse-common-grid *ngIf="!utilityService.isLoading && dataArray && dataArray.length > 0"
+    [showAction]="true"
+    [columns]="columns"
+    [data]="dataArray"
+    [childColumns]="childColumns"
+    [enablePagination]="enablePagination"
+    [enableSorting]="enableSorting"
+    [totalRecords]="totalRecords"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage"
+    [screenCode]="filterDetails['screenName']"
+    [sortDirection] = "sortDirection"
+    (pageChange)="onPageChange($event)"
+    (sortChange)="onSortChange($event)"
+    (rowClickEvent)="onRowClick($event)"
+    >
+  </eclipse-common-grid>
+</div>
+<div class="err-img-container" *ngIf="!utilityService.isLoading && dataArray && dataArray.length === 0">
+  <img [src]="illustrationImage" [alt]="'genericErrMsg'" class="error-img" />
+  <div class="err-content">
+    <h1>No record found</h1>
+    <h5 *ngIf="errorMessage">{{ errorMessage }}</h5>
+    <h5 *ngIf="!errorMessage">Data not found. Please try after sometime.</h5>
+  </div>
+</div>
+<div>
+  <niq-side-panel-overlay #niqSidePanel [withHeader]="true" [withClose]="true" header="Filter" alignment="left"
+    position="right" headerIcon="filter" [counter]="0" >
+    <div content>
+      <eclipse-filterdrawer [filterFieldDetails]="filterFieldDetails" (close)="closeFilterPopup($event)"
+        [filterDetails]="filterDetails" ></eclipse-filterdrawer>
+    </div>
+  </niq-side-panel-overlay>
+</div>
+<eclipse-athena-dialog [title]="title" [monId]="monId" [detailsPath]="detailsPath"
+  (confirmEvent)="deleteConfirmation($event)"></eclipse-athena-dialog>

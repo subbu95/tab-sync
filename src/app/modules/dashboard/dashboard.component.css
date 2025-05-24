@@ -1,0 +1,98 @@
+.session-container {
+  height: calc(100vh - 92px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 210px;
+    border-radius: 10px;
+    gap: 32px;
+    padding: 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    position: relative;
+    top: 60%;
+
+    .row-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 32px;
+
+      .fields {
+        font-weight: 500;
+        line-height: 20px;
+        color: #525252;
+      }
+
+      .session-dropdown {
+        height: 32px !important;
+        background-color: #f4f4f4;
+        --mdc-filled-text-field-container-color: #f4f4f4;
+        --mat-select-enabled-trigger-text-color: #262626;
+        --mat-select-trigger-text-line-height: 20px !important;
+        mat-form-field {
+          width: 180px !important;
+          height: 32px !important;
+          border-bottom: 1px solid #262626;
+          margin-bottom: 10px;
+
+          .mat-mdc-select-value {
+              font-size: 14px;
+          }
+
+          .mat-mdc-form-field-infix {
+              padding-top: 5px !important;
+          }
+
+          .mdc-line-ripple {
+              opacity: 0;
+          }
+
+          .panel{
+            --width: 180px !important;
+          }
+      }
+
+      }
+    }
+  }
+
+  .niq-button {
+    padding: 8px 16px;
+    border-width: 1px !important;
+    margin-top: 35px;
+    position: relative!important;
+    top: 110px!important;
+    transform: translateY(18px)!important;
+  }
+}
+
+div.mat-mdc-select-panel {
+ 
+  max-height: 300px !important;
+  position: absolute !important;
+  background-color: #FFFFFF !important;
+  --mat-option-selected-state-label-text-color: #262626;
+  --mat-option-label-text-color: #262626;
+  --item-ow-min-height: 36px;
+  padding: 0px !important;
+}
+
+.niq-background-img {
+  height: 250px;
+  width: 100%;
+  background-image: url('../../../assets/images/NIQ-background-img.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0px 60px 60px 0px #2d6df666;
+  border-radius: 0 0 95% 95%;
+}
